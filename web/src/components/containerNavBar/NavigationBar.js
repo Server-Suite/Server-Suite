@@ -61,7 +61,9 @@ export class NavigationBar extends React.Component {
             </Link>
           </Col>
           <Col lg={12}>
-            <i className="pi pi-folder-open"></i>
+            <Link to="/fs">
+              <i className="pi pi-folder-open"></i>
+            </Link>
           </Col>
           <Col lg={12}>
             <i

@@ -3,7 +3,7 @@ import psutil
 from flask import jsonify
 
 
-from app.AppConstants import CPU_DATABASE_FILENAME
+from app.AppConstants import DATABASE_FILENAME
 
 
 class CpuInfo:
@@ -11,7 +11,7 @@ class CpuInfo:
         return [("CORE" + str(core)) for core in range(psutil.cpu_count())]
 
     def get_combined_cpu_usage_per_core(self):
-        conn = sqlite3.connect(CPU_DATABASE_FILENAME)
+        conn = sqlite3.connect(DATABASE_FILENAME)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM CPU ORDER BY id DESC LIMIT 20")
         l = [list(row[1:]) for row in cursor.fetchall()[::-1]]
@@ -26,7 +26,7 @@ class CpuInfo:
         return jsonify({"cpu_per_core": responses})
 
     def get_isolate_cpu_usage_per_core(self):
-        conn = sqlite3.connect(CPU_DATABASE_FILENAME)
+        conn = sqlite3.connect(DATABASE_FILENAME)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM CPU ORDER BY id DESC LIMIT 20")
         l = [list(row[1:]) for row in cursor.fetchall()[::-1]]

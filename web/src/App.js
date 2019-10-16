@@ -6,6 +6,7 @@ import Virtulization from "./components/containerVirtulization/Virtulization";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { HashRouter, Route } from "react-router-dom";
+import { ContainerFiles } from "./components/containerFiles/containerFiles";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Col lg={11}>
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/virt" component={Virtulization} />
+          <Route exact path="/fs" component={ContainerFiles} />
         </Col>
       </Row>
     </HashRouter>

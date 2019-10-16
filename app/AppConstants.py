@@ -1,2 +1,2 @@
-CPU_DATABASE_FILENAME = "./database/cpu.db"
+DATABASE_FILENAME = "./database/server-suite.db"
 

@@ -1,7 +1,8 @@
 import React from "react";
 import Badge from "react-bootstrap/Badge";
 import { Card } from "primereact/card";
-import { SplitButton } from "primereact/splitbutton";
+import { TieredMenu } from "primereact/tieredmenu";
+import { Button } from "primereact/button";
 
 import "./DockerImages.scss";
 import Col from "react-bootstrap/Col";
@@ -27,7 +28,7 @@ export default class DockerImages extends React.Component {
   };
   render() {
     const { images } = this.props;
-    if (images) {
+    if (typeof images === "object" && images !== null) {
       return (
         <Row>
           {" "}
@@ -43,8 +44,10 @@ export default class DockerImages extends React.Component {
   }
 }
 const Image = ({ image, items }) => {
+  let menu = null;
   return (
     <Col lg={3} sm={12} md={4}>
+      <TieredMenu model={items} popup={true} ref={el => (menu = el)} />
       <Card title={image.RepoTags[0]} subTitle="SubTitle">
         <div className="docker-image-details">
           <p>
@@ -54,12 +57,17 @@ const Image = ({ image, items }) => {
             SHA:<Badge variant="info">{image.Id.slice(0, 13)}</Badge>
           </p>
         </div>
-        <SplitButton
+        <Button
+          label="Show"
+          icon="pi pi-bars"
+          onClick={event => menu.toggle(event)}
+        />
+
+        {/* <SplitButton
           label="Image"
           icon="pi pi-options"
-          //   onClick={this.save}
           model={items}
-        ></SplitButton>
+        ></SplitButton> */}
       </Card>
     </Col>
   );
